@@ -1,7 +1,7 @@
 package tomasulo;
 
 public class Registro{
-	private int Op;
+	private String Op;
 	private String Qj;
 	private int Valorj;
 	private String Qk;
@@ -10,7 +10,7 @@ public class Registro{
 	private String tag;
 	
 	public Registro(){
-		setOp(-1);
+		setOp("");
 		setQj("");
 		setValorj(-1);
 		setQk("");
@@ -20,12 +20,12 @@ public class Registro{
 	}
 	//Registros genericos, inicializados en forma invalida, cuando una ER los contruye los inicializa
 	// con lo que va a utilizar
-	public int getOp() {
+	public String getOp() {
 		return Op;
 	}
 
-	public void setOp(int op) {
-		Op = op;
+	public void setOp(String op) {
+		this.Op = op;
 	}
 
 	public String getQj() {

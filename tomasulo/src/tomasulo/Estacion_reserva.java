@@ -4,20 +4,20 @@ import tomasulo.Registro;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-public class Mult_ER {
+public class Estacion_reserva {
 	private int tamano_cola;
-	private ArrayList<Registro> lista_multi;
-	public Semaphore mutex_multi;
+	private ArrayList<Registro> lista;
+	public Semaphore mutex;
 	public Registro registro_var;
 	
-	Mult_ER(int tamano_cola){
-		Semaphore mutex_multi = new Semaphore(1);
-		lista_multi = new ArrayList<Registro>(tamano_cola);
-		
+	Estacion_reserva(int tamano_cola, String tag){
+		mutex = new Semaphore(1);
+		lista = new ArrayList<Registro>(tamano_cola);
+		this.tamano_cola = tamano_cola;
 		for(int i = 0 ; i<tamano_cola ; i++ ){
 			Registro r = new Registro();
-			r.setTag("multi" + i);
-			lista_multi.add(r);
+			r.setTag(tag + i);
+			lista.add(r);
 		}
 	}
 	
@@ -25,9 +25,11 @@ public class Mult_ER {
 //	@return posicion de la ER disponible
 			
 	public int is_space(){
+		//System.out.println("[er] is_space ");
 		int index = -1;
 		for(int i = 0 ; i<tamano_cola ; i++ ){
-			if (!lista_multi.get(i).isBusy()){
+			//System.out.println("[er] is_space busy" + !lista.get(i).isBusy());
+			if (!lista.get(i).isBusy()){
 				index = i;
 				break;
 			}
@@ -41,25 +43,16 @@ public class Mult_ER {
 			
 	public String set_registro(int index, Registro reg){
 		Registro registro;
-		lista_multi.set(index, reg);
+		lista.set(index, reg);
 		registro = get_registro(index);		
 		return registro.getTag();
 	}
 	
 	public Registro get_registro(int index){		
-		return lista_multi.get(index);
+		return lista.get(index);
 	}
 	
 	public ArrayList<Registro> get_ER(){
-		return lista_multi;
+		return lista;
 	}
-	
-	public int operar(){
-		int resultado = 0;
-		
-		
-		
-		return resultado;		
-	}
-
 }

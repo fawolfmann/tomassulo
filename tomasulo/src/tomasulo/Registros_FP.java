@@ -10,12 +10,20 @@ public class Registros_FP {
 	//Solo utilizo los valor Qj y Valorj, el resto para esta estacion no se utilizan
 	
 	public Registros_FP(int tamano_cola){
-		Semaphore mutex_multi = new Semaphore(1);
+		//mutex_multi = new Semaphore(1);
 		lista_registros = new ArrayList<Registro>(tamano_cola);
+		
+		for(int i = 0 ; i<tamano_cola ; i++ ){
+			Registro r = new Registro();
+			r.setTag("R" + i);
+			lista_registros.add(r);
+		}
 	}
 	
-	public void set_registroFP(int index , Registro reg){
-		lista_registros.set(index, reg);
+	public void set_registroFP(int index , String tag, int value){
+		Registro reg = lista_registros.get(index);
+		reg.setQj(tag);
+		reg.setValorj(value);
 	}
 	
 	public Registro get_registro(int index ){
