@@ -10,7 +10,7 @@ public class Adder extends Operator{
 	public int operate(){
 		//System.out.println("[Adder] add busy " +this.timeStamp+" " + System.currentTimeMillis() );
 		if(this.timeStamp+delayTime < System.currentTimeMillis()){
-			//System.out.println("[Adder] completed " );
+			System.out.println("[Adder] completed " );
 			setBusy(false);
 			timeStamp = 0;
 			return valorj + valork;

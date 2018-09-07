@@ -177,7 +177,7 @@ public class Instruccion_buffer implements Runnable  {
 				//System.out.println("[Instrction buffer] NOP");
 				Dispatched();
 				try {
-					Thread.sleep(Main.clock);
+					Thread.sleep(test1.clock);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}					

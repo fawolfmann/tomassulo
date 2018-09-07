@@ -33,7 +33,7 @@ public class CDBus extends Thread {
 		
 		for (int i=0; i<mer.get_ER().size(); i++){
 			reg_temp = mer.get_registro(i);
-			if(reg_temp.getValorj() > 0 && reg_temp.getValork() > 0  ){
+			if(reg_temp.getValorj() > 0 && reg_temp.getValork() > 0  && mer.get_registro(i).isBusy()){
 				//Tiene los operandos mando al multiplicador
 				if(!multi.isBusy()){
 					multi.values_in(reg_temp.getValorj(), reg_temp.getValork(),reg_temp.getTag() );
@@ -45,20 +45,20 @@ public class CDBus extends Thread {
 		for (int i=0; i<aer.get_ER().size(); i++){
 			reg_temp = aer.get_registro(i);
 			//System.out.println("[CDB] to dispatch 1 " +reg_temp.getTag()+  reg_temp.getValorj() +reg_temp.getValork() );
-			if(reg_temp.getValorj() > 0 && reg_temp.getValork() > 0  ){
+			if(reg_temp.getValorj() > 0 && reg_temp.getValork() > 0  && aer.get_registro(i).isBusy()){
 				//Tiene los operandos mando al multiplicador
 				if(!add.isBusy()){
 					add.values_in(reg_temp.getValorj(), reg_temp.getValork(),reg_temp.getTag() );
 					aer.get_registro(i).setBusy(false);
 
-					//System.out.println("[CDB] dispached " + reg_temp.getValorj() +reg_temp.getValork() );
+					System.out.println("[CDB] dispached " + reg_temp.getValorj() +reg_temp.getValork() );
 				}
 			}
 		}
 		for (int i=0; i<ler.get_ER().size(); i++){
 			reg_temp = ler.get_registro(i);
 			//System.out.println("[CDB] to dispatch ler " +reg_temp.getTag()+  reg_temp.getValorj());
-			if(reg_temp.getValorj() > 0 ){
+			if(reg_temp.getValorj() > 0 && ler.get_registro(i).isBusy() ){
 				//Tiene los operandos mando al multiplicador
 				if(!load.isBusy()){
 					load.values_in(reg_temp.getValorj(),reg_temp.getTag() );
@@ -70,7 +70,7 @@ public class CDBus extends Thread {
 		}
 		for (int i=0; i<ser.get_ER().size(); i++){
 			reg_temp = ser.get_registro(i);
-			if(reg_temp.getValorj() > 0 ){
+			if(reg_temp.getValorj() > 0 && ser.get_registro(i).isBusy() ){
 				//Tiene los operandos mando al multiplicador
 				if(!store.isBusy()){
 					store.values_in(reg_temp.getValorj(), reg_temp.getValork(),reg_temp.getTag() );
